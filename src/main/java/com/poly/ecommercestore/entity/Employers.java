@@ -1,5 +1,6 @@
 package com.poly.ecommercestore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
@@ -27,11 +28,14 @@ public class Employers {
     @Column(name = "Name")
     private String name;
 
+    @Column(name = "Address")
+    private String address;
+
     @Column(name = "Birthday")
     private Date birthday;
 
     @Column(name = "Gender")
-    private boolean gender;
+    private Boolean gender;
 
     @Column(name = "Telephone")
     private String telephone;
@@ -55,10 +59,11 @@ public class Employers {
     public Employers() {
     }
 
-    public Employers(String iDEmployer, Accounts account, String name, Date birthday, boolean gender, String telephone, String identityCard, String avatar) {
+    public Employers(String iDEmployer, Accounts account,String name, String address, Date birthday, Boolean gender, String telephone, String identityCard, String avatar) {
         this.iDEmployer = iDEmployer;
         this.account = account;
         this.name = name;
+        this.address = address;
         this.birthday = birthday;
         this.gender = gender;
         this.telephone = telephone;
@@ -66,10 +71,11 @@ public class Employers {
         this.avatar = avatar;
     }
 
-    public Employers(String iDEmployer, Accounts account, String name, Date birthday, boolean gender, String telephone, String identityCard, String avatar, List<Orders> orders, List<ImportStocks> importStocks, List<ExportStocks> exportStocks) {
+    public Employers(String iDEmployer, Accounts account, String name, String address, Date birthday, Boolean gender, String telephone, String identityCard, String avatar, List<Orders> orders, List<ImportStocks> importStocks, List<ExportStocks> exportStocks) {
         this.iDEmployer = iDEmployer;
         this.account = account;
         this.name = name;
+        this.address = address;
         this.birthday = birthday;
         this.gender = gender;
         this.telephone = telephone;

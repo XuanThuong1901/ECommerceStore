@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/")
+@RequestMapping("/api")
 public class StatusController {
 
     @Autowired
     private StatusService statusService;
-    @GetMapping("test/")
+    @GetMapping("/test")
     public ResponseEntity<?> get(){
         System.out.println("in ra");
         List<Status> list = statusService.getAllStatus();

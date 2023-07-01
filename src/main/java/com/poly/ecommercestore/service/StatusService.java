@@ -1,7 +1,6 @@
 package com.poly.ecommercestore.service;
 
 import com.poly.ecommercestore.entity.Status;
-import com.poly.ecommercestore.interfaces.iService.IStatusService;
 import com.poly.ecommercestore.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,5 +1,6 @@
 package com.poly.ecommercestore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -57,4 +58,5 @@ public class Customers {
         this.carts = carts;
         this.orders = orders;
     }
+
 }
