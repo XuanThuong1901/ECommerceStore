@@ -1,8 +1,8 @@
 package com.poly.ecommercestore.service.user;
 
-import com.poly.ecommercestore.dto.UserDTO;
 import com.poly.ecommercestore.entity.*;
 import com.poly.ecommercestore.repository.*;
+import com.poly.ecommercestore.request.AccountRequest;
 import com.poly.ecommercestore.request.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,67 +31,46 @@ public class UserService implements  IUserService{
     @Autowired
     private EmployerRepository employerRepository;
 
-    private static final int lengthID = 10;
-    private static final int iDStatus = 1;
-
     @Override
-    public Accounts createUser(UserRequest user, String permission) {
-        Accounts newAccount = new Accounts();
-        Status status = statusRepository.getStatusById(iDStatus);
-        Positions position = positionRepository.getPositionById(user.getPosition());
-//        String encoderPassword = passwordEncoder.encode(user.getPassword());
+    public Object updateUser(UserRequest user) {
 
-        newAccount.setEmail(user.getEmail());
-        newAccount.setPassword(user.getPassword());
-        newAccount.setStatus(status);
-        newAccount.setPosition(position);
-        if(permission.equals("customer")){
-            String newID = "CUS" + generateRandomString();
-            newAccount.setIDAccount(newID);
+        String keyId = user.getUserId().substring(0,3);
 
+        if(keyId.equals("CUS")){
+            Customers updateCus = customerRepository.getCustomersById(user.getUserId());
+            updateCus.setName(user.getName());
+            updateCus.setAddress(user.getAddress());
+            updateCus.setTelephone(user.getTelephone());
 
-            Customers newCustomer = new Customers(newID, newAccount, user.getName(), user.getAddress(), user.getTelephone());
+            customerRepository.save(updateCus);
 
-//            customer.setIDCustomer(newID);
-//            customer.setName(user.getName());
-//            customer.setAddress(user.getAddress());
-//            customer.setTelephone(user.getTelephone());
-
-            newAccount.setCustomers(newCustomer);
-            this.accountRepository.save(newAccount);
-            this.customerRepository.save(newCustomer);
+            return updateCus;
         }
-        else if(permission.equals("employer")){
-            String newID = "EMP" + generateRandomString();
-            newAccount.setIDAccount(newID);
+        else if(keyId.equals("EMP")) {
+            Employers updateEmp = employerRepository.getEmployersById(user.getUserId());
+            updateEmp.setName(user.getName());
+            updateEmp.setAddress(user.getAddress());
+            updateEmp.setTelephone(user.getTelephone());
+            updateEmp.setBirthday(user.getBirthday());
+            updateEmp.setAvatar(user.getAvatar());
+            updateEmp.setGender(user.getGender());
+            updateEmp.setIdentityCard(user.getIdentityCard());
 
-            Employers newEmployer = new Employers(newID, newAccount,user.getName(), user.getAddress(), user.getBirthday(), user.getGender(), user.getTelephone(), user.getIdentityCard(), user.getAvatar());
+            employerRepository.save(updateEmp);
 
-
-            newAccount.setEmployer(newEmployer);
-            this.accountRepository.save(newAccount);
-            this.employerRepository.save(newEmployer);
+            return updateEmp;
         }
-
-        return newAccount;
+        return null;
     }
 
     @Override
-    public Accounts getAccountByLogin(String email, String password) {
-//        String encoderPassword = passwordEncoder.encode(password);
-        return accountRepository.findByLogin(email, password);
-    }
-
-    public static String generateRandomString() {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        Random random = new Random();
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < lengthID; i++) {
-            int randomIndex = random.nextInt(characters.length());
-            char randomChar = characters.charAt(randomIndex);
-            sb.append(randomChar);
+    public Accounts updatePassword(AccountRequest account) {
+        Accounts updateAccount = accountRepository.getByEmail(account.getEmail());
+        if(updateAccount != null){
+            updateAccount.setPassword(account.getPassword());
+            accountRepository.save(updateAccount);
+            return updateAccount;
         }
-        return sb.toString();
+        return null;
     }
 }

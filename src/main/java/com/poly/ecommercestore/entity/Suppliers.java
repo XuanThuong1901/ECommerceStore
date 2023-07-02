@@ -29,7 +29,7 @@ public class Suppliers {
     private String address;
 
     @OneToMany(mappedBy = "supplier")
-    private List<PurchaseOrders> purchaseOrders;
+    private List<ImportStocks> importStocks;
 
     @OneToMany(mappedBy = "supplier")
     private List<Products> products;
@@ -44,12 +44,12 @@ public class Suppliers {
         this.address = address;
     }
 
-    public Suppliers(String supplierName, String email, String telephone, String address, List<PurchaseOrders> purchaseOrders, List<Products> products) {
+    public Suppliers(String supplierName, String email, String telephone, String address, List<ImportStocks> importStocks, List<Products> products) {
         this.supplierName = supplierName;
         this.email = email;
         this.telephone = telephone;
         this.address = address;
-        this.purchaseOrders = purchaseOrders;
+        this.importStocks = importStocks;
         this.products = products;
     }
 }

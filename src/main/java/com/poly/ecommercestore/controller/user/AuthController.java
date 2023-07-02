@@ -1,10 +1,10 @@
-package com.poly.ecommercestore.controller;
+package com.poly.ecommercestore.controller.user;
 
 import com.poly.ecommercestore.entity.Accounts;
 import com.poly.ecommercestore.repository.AccountRepository;
-import com.poly.ecommercestore.request.UserLoginRequest;
+import com.poly.ecommercestore.request.AccountRequest;
 import com.poly.ecommercestore.request.UserRequest;
-import com.poly.ecommercestore.service.shared.ECommerceMessage;
+import com.poly.ecommercestore.service.user.AuthService;
 import com.poly.ecommercestore.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class AuthController {
     private AccountRepository accountRepository;
 
     @Autowired
-    private UserService userService;
+    private AuthService authService;
 
     @PostMapping("/register/{permission}")
     public ResponseEntity<String> register(UserRequest user, @PathVariable(value = "permission") String permission){
@@ -27,14 +27,14 @@ public class AuthController {
         }
 
         System.out.println(permission);
-        userService.createUser(user, permission);
+        authService.createUser(user, permission);
         return ResponseEntity.ok("User created successfully.");
     }
 
     @PostMapping("/login")
-    public Accounts login(UserLoginRequest loginRequest){
+    public Accounts login(AccountRequest loginRequest){
         try {
-            Accounts account = userService.getAccountByLogin(loginRequest.getEmail(), loginRequest.getPassword());
+            Accounts account = authService.getAccountByLogin(loginRequest.getEmail(), loginRequest.getPassword());
             if(account != null)
                 return account;
             return null;

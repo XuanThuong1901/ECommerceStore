@@ -53,9 +53,6 @@ public class Employers {
     @OneToMany(mappedBy = "employer")
     private List<ImportStocks> importStocks;
 
-    @OneToMany(mappedBy = "employer")
-    private List<ExportStocks> exportStocks;
-
     public Employers() {
     }
 
@@ -71,7 +68,7 @@ public class Employers {
         this.avatar = avatar;
     }
 
-    public Employers(String iDEmployer, Accounts account, String name, String address, Date birthday, Boolean gender, String telephone, String identityCard, String avatar, List<Orders> orders, List<ImportStocks> importStocks, List<ExportStocks> exportStocks) {
+    public Employers(String iDEmployer, Accounts account, String name, String address, Date birthday, Boolean gender, String telephone, String identityCard, String avatar, List<Orders> orders, List<ImportStocks> importStocks) {
         this.iDEmployer = iDEmployer;
         this.account = account;
         this.name = name;
@@ -83,6 +80,5 @@ public class Employers {
         this.avatar = avatar;
         this.orders = orders;
         this.importStocks = importStocks;
-        this.exportStocks = exportStocks;
     }
 }

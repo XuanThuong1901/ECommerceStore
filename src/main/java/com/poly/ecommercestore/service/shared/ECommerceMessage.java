@@ -42,6 +42,14 @@ public interface ECommerceMessage {
 
     String USER_DELETED= "User Deleted";
 
+    String USER_NOT_FOUND = "User not found";
+
+    String USER_SUCCESSFUL = "User successful";
+
+    String ACCOUNT_NOT_FOUND = "Account not found";
+
+    String ACOUNT_SUCCESSFUL = "Account successful";
+
     String CATEGORY_NAME_ALREADY_IN_USE = "Category Name Already In Use!";
 
     String SELLER_SAVED = "Seller Saved...";

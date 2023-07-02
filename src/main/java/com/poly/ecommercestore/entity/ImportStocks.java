@@ -16,11 +16,6 @@ public class ImportStocks {
     @Column(name = "IDImportStock")
     private int iDImportStock;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "IDImportStock")
-    private PurchaseOrders purchaseOrder;
-
     @Column(name = "ImportStockName")
     private String importStockName;
 
@@ -35,8 +30,8 @@ public class ImportStocks {
     private Employers employer;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "IDWareHouse")
-    private WareHouses wareHouse;
+    @JoinColumn(name = "IDSupplier")
+    private Suppliers supplier;
 
     @OneToMany(mappedBy = "importStock")
     private List<DetailImportStocks> detailImportStocks;
@@ -44,22 +39,21 @@ public class ImportStocks {
     public ImportStocks() {
     }
 
-    public ImportStocks(PurchaseOrders purchaseOrder, String importStockName, String contents, Date dateAdded, Employers employer, WareHouses wareHouse) {
-        this.purchaseOrder = purchaseOrder;
+    public ImportStocks(int iDImportStock, String importStockName, String contents, Date dateAdded, Employers employer, Suppliers supplier) {
+        this.iDImportStock = iDImportStock;
         this.importStockName = importStockName;
         this.contents = contents;
         this.dateAdded = dateAdded;
         this.employer = employer;
-        this.wareHouse = wareHouse;
+        this.supplier = supplier;
     }
 
-    public ImportStocks(PurchaseOrders purchaseOrder, String importStockName, String contents, Date dateAdded, Employers employer, WareHouses wareHouse, List<DetailImportStocks> detailImportStocks) {
-        this.purchaseOrder = purchaseOrder;
+    public ImportStocks(int iDImportStock, String importStockName, String contents, Date dateAdded, Employers employer, List<DetailImportStocks> detailImportStocks) {
+        this.iDImportStock = iDImportStock;
         this.importStockName = importStockName;
         this.contents = contents;
         this.dateAdded = dateAdded;
         this.employer = employer;
-        this.wareHouse = wareHouse;
         this.detailImportStocks = detailImportStocks;
     }
 }

@@ -7,6 +7,7 @@ import java.util.Date;
 @Data
 public class UserRequest {
 
+    private String userId;
     private String email;
     private String password;
     private String name;
@@ -27,7 +28,8 @@ public class UserRequest {
 //        this.position = position;
 //    }
 
-    public UserRequest(String email, String password, String name, Date birthday, String address, Boolean gender, String telephone, String identityCard, String avatar, int position) {
+    public UserRequest(String userId, String email, String password, String name, Date birthday, String address, Boolean gender, String telephone, String identityCard, String avatar, int position) {
+        this.userId = (userId != null) ? userId : "N/A";
         this.email = email;
         this.password = password;
         this.name = name;

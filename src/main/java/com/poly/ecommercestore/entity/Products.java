@@ -19,6 +19,9 @@ public class Products {
     @Column(name = "ProductName")
     private String productName;
 
+    @Column(name = "Quantity")
+    private int quantity;
+
     @Column(name = "Price")
     private BigDecimal price;
 
@@ -50,15 +53,6 @@ public class Products {
     private List<ImageProducts> imageProducts;
 
     @OneToMany(mappedBy = "product")
-    private List<DetailProducts> detailProductsList;
-
-    @OneToMany(mappedBy = "product")
-    private List<DetailExportStocks> detailExportStocks;
-
-    @OneToMany(mappedBy = "product")
-    private List<DetailPurchaseOrders> detailPurchaseOrders;
-
-    @OneToMany(mappedBy = "product")
     private List<DetailImportStocks> detailImportStocks;
 
     @OneToMany(mappedBy = "product")
@@ -70,8 +64,9 @@ public class Products {
     public Products() {
     }
 
-    public Products(String productName, BigDecimal price, String feature, String contents, String guarantee, String expiry, DetailCategories detailCategory, Suppliers supplier) {
+    public Products(String productName, int quantity, BigDecimal price, String feature, String contents, String guarantee, String expiry, DetailCategories detailCategory, Suppliers supplier) {
         this.productName = productName;
+        this.quantity = quantity;
         this.price = price;
         this.feature = feature;
         this.contents = contents;
@@ -81,8 +76,9 @@ public class Products {
         this.supplier = supplier;
     }
 
-    public Products(String productName, BigDecimal price, String feature, String contents, String guarantee, String expiry, DetailCategories detailCategory, Suppliers supplier, List<Specifications> specifications, List<ImageProducts> imageProducts, List<DetailProducts> detailProductsList, List<DetailExportStocks> detailExportStocks, List<DetailPurchaseOrders> detailPurchaseOrders, List<DetailImportStocks> detailImportStocks, List<Carts> carts, List<DetailOrders> detailOrders) {
+    public Products(String productName, int quantity, BigDecimal price, String feature, String contents, String guarantee, String expiry, DetailCategories detailCategory, Suppliers supplier, List<Specifications> specifications, List<ImageProducts> imageProducts, List<DetailImportStocks> detailImportStocks, List<Carts> carts, List<DetailOrders> detailOrders) {
         this.productName = productName;
+        this.quantity = quantity;
         this.price = price;
         this.feature = feature;
         this.contents = contents;
@@ -92,9 +88,6 @@ public class Products {
         this.supplier = supplier;
         this.specifications = specifications;
         this.imageProducts = imageProducts;
-        this.detailProductsList = detailProductsList;
-        this.detailExportStocks = detailExportStocks;
-        this.detailPurchaseOrders = detailPurchaseOrders;
         this.detailImportStocks = detailImportStocks;
         this.carts = carts;
         this.detailOrders = detailOrders;
