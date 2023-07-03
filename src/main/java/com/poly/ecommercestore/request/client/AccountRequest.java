@@ -1,4 +1,4 @@
-package com.poly.ecommercestore.request;
+package com.poly.ecommercestore.request.client;
 
 import lombok.Data;
 

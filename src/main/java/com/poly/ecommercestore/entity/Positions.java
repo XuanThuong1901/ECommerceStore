@@ -1,7 +1,11 @@
 package com.poly.ecommercestore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.List;
 
@@ -18,6 +22,7 @@ public class Positions {
     @Column(name = "Position")
     private String position;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "position")
     private List<Accounts> accounts;
 

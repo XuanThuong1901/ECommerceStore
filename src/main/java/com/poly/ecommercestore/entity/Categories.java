@@ -2,9 +2,13 @@ package com.poly.ecommercestore.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import java.util.List;
 
 @Data
@@ -20,6 +24,8 @@ public class Categories {
     @Column(name = "CategoryName")
     private String categoryName;
 
+    @JsonIgnoreProperties("category")
+    @Fetch(FetchMode.JOIN)
     @OneToMany(mappedBy = "category")
     private List<DetailCategories> detailCategories;
 

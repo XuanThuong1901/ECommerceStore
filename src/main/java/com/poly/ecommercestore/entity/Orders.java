@@ -1,7 +1,10 @@
 package com.poly.ecommercestore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -28,27 +31,37 @@ public class Orders {
     @Column(name = "Note")
     private String note;
 
-
+    @JsonIgnoreProperties("orders")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "IDCustomer")
     private Customers customer;
 
+    @JsonIgnoreProperties("orders")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "IDEmployer")
     private Employers employer;
 
+    @JsonIgnoreProperties("orders")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "IDShippingUnit")
     private ShippingUnits shippingUnit;
 
+    @JsonIgnoreProperties("orders")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "IDPayment")
     private Payments payment;
 
+    @JsonIgnoreProperties("orders")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "IDStatusOrder")
     private StatusOrders statusOrder;
 
+    @JsonIgnoreProperties("order")
     @OneToMany(mappedBy = "order")
     private List<DetailOrders> detailOrders;
 

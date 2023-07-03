@@ -1,7 +1,10 @@
 package com.poly.ecommercestore.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -17,6 +20,8 @@ public class Customers {
     @Column(name = "IDCustomer")
     private String iDCustomer;
 
+    @JsonIgnoreProperties("carts")
+    @Fetch(FetchMode.JOIN)
     @MapsId
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -32,11 +37,19 @@ public class Customers {
     @Column(name = "Telephone")
     private String telephone;
 
+    @JsonIgnoreProperties("customer")
+    @Fetch(FetchMode.JOIN)
     @OneToMany(mappedBy = "customer")
     private List<Carts> carts;
 
+    @JsonIgnoreProperties("customer")
+    @Fetch(FetchMode.JOIN)
     @OneToMany(mappedBy = "customer")
     private List<Orders> orders;
+
+    @JsonIgnore()
+    @OneToMany(mappedBy = "customer")
+    private List<Evaluations> evaluations;
 
     public Customers() {
     }

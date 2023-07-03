@@ -1,7 +1,10 @@
 package com.poly.ecommercestore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,14 +28,19 @@ public class ImportStocks {
     @Column(name = "DateAdded")
     private Date dateAdded;
 
+    @JsonIgnoreProperties("importStocks")
+    @Fetch(FetchMode.JOIN)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IDEmployer")
     private Employers employer;
 
+    @JsonIgnoreProperties("importStocks")
+    @Fetch(FetchMode.JOIN)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IDSupplier")
     private Suppliers supplier;
 
+    @JsonIgnoreProperties("importStock")
     @OneToMany(mappedBy = "importStock")
     private List<DetailImportStocks> detailImportStocks;
 

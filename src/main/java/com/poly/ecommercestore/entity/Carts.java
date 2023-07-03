@@ -1,8 +1,11 @@
 package com.poly.ecommercestore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.poly.ecommercestore.entity.embeddable.CartId;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Data
 @Entity
@@ -12,22 +15,26 @@ public class Carts {
     @EmbeddedId
     private CartId cartId;
 
-    @Column(name = "CategoryName")
-    private String categoryName;
+    @Column(name = "Quantity")
+    private int quantity;
 
+    @JsonIgnoreProperties("carts")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "IDCustomer", referencedColumnName = "IDCustomer", insertable = false, updatable = false)
     private Customers customer;
 
+    @JsonIgnoreProperties("carts")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "IDProduct", referencedColumnName = "IDProduct", insertable = false, updatable = false)
     private Products product;
 
     public Carts() {
     }
 
-    public Carts(String categoryName, Customers customer, Products product) {
-        this.categoryName = categoryName;
+    public Carts(int quantity, Customers customer, Products product) {
+        this.quantity = quantity;
         this.customer = customer;
         this.product = product;
     }

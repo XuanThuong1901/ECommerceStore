@@ -2,10 +2,9 @@ package com.poly.ecommercestore.controller.user;
 
 import com.poly.ecommercestore.entity.Accounts;
 import com.poly.ecommercestore.repository.AccountRepository;
-import com.poly.ecommercestore.request.AccountRequest;
-import com.poly.ecommercestore.request.UserRequest;
+import com.poly.ecommercestore.request.client.AccountRequest;
+import com.poly.ecommercestore.request.client.UserRequest;
 import com.poly.ecommercestore.service.user.AuthService;
-import com.poly.ecommercestore.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

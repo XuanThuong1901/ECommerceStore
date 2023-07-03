@@ -1,8 +1,8 @@
 package com.poly.ecommercestore.controller.user;
 
 import com.poly.ecommercestore.repository.AccountRepository;
-import com.poly.ecommercestore.request.AccountRequest;
-import com.poly.ecommercestore.request.UserRequest;
+import com.poly.ecommercestore.request.client.AccountRequest;
+import com.poly.ecommercestore.request.client.UserRequest;
 import com.poly.ecommercestore.service.shared.ECommerceMessage;
 import com.poly.ecommercestore.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;

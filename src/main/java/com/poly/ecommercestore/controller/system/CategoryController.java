@@ -1,12 +1,55 @@
 package com.poly.ecommercestore.controller.system;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.poly.ecommercestore.entity.Categories;
+import com.poly.ecommercestore.repository.CategoryRepository;
+import com.poly.ecommercestore.repository.DetailCategoryRepository;
+import com.poly.ecommercestore.request.system.CategoryRequest;
+import com.poly.ecommercestore.service.category.CategoryService;
+import com.poly.ecommercestore.service.category.DetailCategoryService;
+import com.poly.ecommercestore.service.shared.ECommerceMessage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/category")
 public class CategoryController {
 
-//    @GetMapping("/")
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private DetailCategoryService detailCategoryService;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @GetMapping("/")
+    public ResponseEntity<?> getAllCategory(){
+        return ResponseEntity.ok(categoryService.getAll());
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<?> addCategory(CategoryRequest category){
+        return ResponseEntity.ok(categoryService.addCategory(category));
+    }
+
+    @PostMapping("/remove/{id}")
+    public ResponseEntity<?> removeCategory(@PathVariable(value = "id") int iDCategory){
+        if(categoryRepository.findById(iDCategory) == null)
+            return ResponseEntity.badRequest().body(ECommerceMessage.SYSTEM_ERROR);
+
+        Boolean check = categoryService.removeCategory(iDCategory);
+        if(!check)
+            return ResponseEntity.badRequest().body(ECommerceMessage.SYSTEM_ERROR);
+
+        return ResponseEntity.ok(ECommerceMessage.CATEGORY_DELETED);
+    }
+
+//    @PostMapping("/update/{id}")
+//    public ResponseEntity<?> updateCategory(@PathVariable(value = "id") int iDCategory){
+//        if(categoryRepository.findById(iDCategory) == null)
+//            return ResponseEntity.badRequest().body(ECommerceMessage.SYSTEM_ERROR);
+//
+//    }
 }

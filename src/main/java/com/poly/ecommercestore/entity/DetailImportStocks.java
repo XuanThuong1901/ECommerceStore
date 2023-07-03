@@ -1,9 +1,13 @@
 package com.poly.ecommercestore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.poly.ecommercestore.entity.embeddable.DetailImportStockId;
 import lombok.*;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import java.math.BigDecimal;
 
 @Data
@@ -20,10 +24,12 @@ public class DetailImportStocks {
     @Column(name = "Price")
     private BigDecimal price;
 
+    @JsonIgnoreProperties("detailImportStocks")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IDImportStock", referencedColumnName = "IDImportStock", insertable = false, updatable = false)
     private ImportStocks importStock;
 
+    @JsonIgnoreProperties("detailImportStocks")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IDProduct", referencedColumnName = "IDProduct", insertable = false, updatable = false)
     private Products product;

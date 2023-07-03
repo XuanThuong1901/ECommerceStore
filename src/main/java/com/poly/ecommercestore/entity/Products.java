@@ -1,7 +1,11 @@
 package com.poly.ecommercestore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -37,29 +41,41 @@ public class Products {
     @Column(name = "Expiry")
     private String expiry;
 
-
+    @JsonIgnoreProperties("products")
+    @Fetch(FetchMode.JOIN)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IDDetailCategory")
     private DetailCategories detailCategory;
 
+    @JsonIgnoreProperties("products")
+    @Fetch(FetchMode.JOIN)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IDSupplier")
     private Suppliers supplier;
 
+    @JsonIgnoreProperties("product")
     @OneToMany(mappedBy = "product")
     private List<Specifications> specifications;
 
+    @JsonIgnoreProperties("product")
     @OneToMany(mappedBy = "product")
     private List<ImageProducts> imageProducts;
 
+    @JsonIgnore()
     @OneToMany(mappedBy = "product")
     private List<DetailImportStocks> detailImportStocks;
 
+    @JsonIgnore()
     @OneToMany(mappedBy = "product")
     private List<Carts> carts;
 
+    @JsonIgnore()
     @OneToMany(mappedBy = "product")
     private List<DetailOrders> detailOrders;
+
+    @JsonIgnore()
+    @OneToMany(mappedBy = "product")
+    private List<Evaluations> evaluations;
 
     public Products() {
     }

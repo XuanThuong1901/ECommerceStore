@@ -1,9 +1,12 @@
 package com.poly.ecommercestore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.poly.ecommercestore.entity.embeddable.DetailOrderId;
 import lombok.*;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Data
 @Entity
@@ -17,10 +20,12 @@ public class DetailOrders {
     private int quantity;
 
 
+    @JsonIgnoreProperties("detailOrders")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IDOrder", referencedColumnName = "IDOrder", insertable = false, updatable = false)
     private Orders order;
 
+    @JsonIgnoreProperties("detailOrders")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IDProduct", referencedColumnName = "IDProduct", insertable = false, updatable = false)
     private Products product;

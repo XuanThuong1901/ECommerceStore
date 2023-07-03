@@ -1,7 +1,11 @@
 package com.poly.ecommercestore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Data
 @Entity
@@ -19,6 +23,7 @@ public class Specifications {
     @Column(name = "Parameter")
     private String parameter;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "IDProduct")
     private Products product;

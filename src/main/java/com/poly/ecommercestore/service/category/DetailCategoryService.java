@@ -5,11 +5,13 @@ import com.poly.ecommercestore.entity.DetailCategories;
 import com.poly.ecommercestore.repository.CategoryRepository;
 import com.poly.ecommercestore.repository.DetailCategoryRepository;
 import com.poly.ecommercestore.repository.ProductRepository;
-import com.poly.ecommercestore.request.DetailCategoryRequest;
+import com.poly.ecommercestore.request.system.DetailCategoryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DetailCategoryService implements IDetailCategoryService{
 
     @Autowired

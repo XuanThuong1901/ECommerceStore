@@ -1,7 +1,7 @@
 package com.poly.ecommercestore.service.category;
 
 import com.poly.ecommercestore.entity.DetailCategories;
-import com.poly.ecommercestore.request.DetailCategoryRequest;
+import com.poly.ecommercestore.request.system.DetailCategoryRequest;
 
 import java.util.List;
 

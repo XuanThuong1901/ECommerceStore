@@ -10,6 +10,8 @@ public interface ECommerceMessage {
 
     String PRODUCT_DELETED = "Product Deleted";
 
+    String CATEGORY_DELETED = "Category Deleted";
+
     String PRODUCT_SAVED = "Product Saved";
 
     String NOT_FOUND_THIS_NAME = "No Product Found With This Name";
