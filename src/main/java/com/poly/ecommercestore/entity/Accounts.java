@@ -37,19 +37,19 @@ public class Accounts {
     @JsonIgnoreProperties("accounts")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "IDPosition")
-    private Positions position;
+    @JoinColumn(name = "IDRole")
+    private Roles role;
 
     public Accounts() {
     }
 
-    public Accounts(String iDAccount, String email, String password, Employers employer, Customers customers, Status status, Positions position) {
+    public Accounts(String iDAccount, String email, String password, Employers employer, Customers customers, Status status, Roles role) {
         this.iDAccount = iDAccount;
         this.email = email;
         this.password = password;
         this.employer = employer;
         this.customers = customers;
         this.status = status;
-        this.position = position;
+        this.role = role;
     }
 }

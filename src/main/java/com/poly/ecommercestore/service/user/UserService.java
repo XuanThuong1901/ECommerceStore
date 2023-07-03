@@ -21,7 +21,7 @@ public class UserService implements  IUserService{
     private StatusRepository statusRepository;
 
     @Autowired
-    private PositionRepository positionRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
     private CustomerRepository customerRepository;

@@ -17,7 +17,7 @@ public class UserRequest {
     private String telephone;
     private String identityCard;
     private String avatar;
-    private int position;
+    private int role;
 
 //    public UserRequest(String email, String password, String name, String address, String telephone, int position) {
 //        this.email = email;
@@ -28,7 +28,7 @@ public class UserRequest {
 //        this.position = position;
 //    }
 
-    public UserRequest(String userId, String email, String password, String name, Date birthday, String address, Boolean gender, String telephone, String identityCard, String avatar, int position) {
+    public UserRequest(String userId, String email, String password, String name, Date birthday, String address, Boolean gender, String telephone, String identityCard, String avatar, int role) {
         this.userId = (userId != null) ? userId : "N/A";
         this.email = email;
         this.password = password;
@@ -39,6 +39,6 @@ public class UserRequest {
         this.telephone = (telephone != null) ? telephone : "N/A";
         this.identityCard = (identityCard != null) ? identityCard : "N/A";
         this.avatar = (avatar != null) ? avatar : "N/A";
-        this.position = position;
+        this.role = role;
     }
 }

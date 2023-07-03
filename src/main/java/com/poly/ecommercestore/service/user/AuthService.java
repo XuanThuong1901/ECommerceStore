@@ -21,7 +21,7 @@ public class AuthService implements IAuthService{
     private StatusRepository statusRepository;
 
     @Autowired
-    private PositionRepository positionRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -36,13 +36,13 @@ public class AuthService implements IAuthService{
     public Accounts createUser(UserRequest user, String permission) {
         Accounts newAccount = new Accounts();
         Status status = statusRepository.getStatusById(iDStatus);
-        Positions position = positionRepository.getPositionById(user.getPosition());
+        Roles role = roleRepository.getRoleById(user.getRole());
 //        String encoderPassword = passwordEncoder.encode(user.getPassword());
 
         newAccount.setEmail(user.getEmail());
         newAccount.setPassword(user.getPassword());
         newAccount.setStatus(status);
-        newAccount.setPosition(position);
+        newAccount.setRole(role);
         if(permission.equals("customer")){
             String newID = "CUS" + generateRandomString();
             newAccount.setIDAccount(newID);

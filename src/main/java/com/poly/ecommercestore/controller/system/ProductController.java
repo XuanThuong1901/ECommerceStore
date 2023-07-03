@@ -26,6 +26,11 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductByPage(page, SIZE));
     }
 
+    @GetMapping("/detailCategory={id}/{page}")
+    public ResponseEntity<?> getProductByDetailCategoryByPage(@PathVariable(value = "id") int id, @PathVariable(value = "page") int page){
+        return ResponseEntity.ok(productService.getProductByDetailCategoryByPage(id, page, SIZE));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getOneProduct(@PathVariable(value = "id") int id){
         return ResponseEntity.ok(productService.getProductById(id));
@@ -49,6 +54,5 @@ public class ProductController {
         productService.removeProduct(id);
         return ResponseEntity.ok(ECommerceMessage.PRODUCT_DELETED);
     }
-
 
 }
