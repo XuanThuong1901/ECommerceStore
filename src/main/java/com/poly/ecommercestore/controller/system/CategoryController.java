@@ -30,7 +30,11 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addCategory(CategoryRequest category){
+    public ResponseEntity<?> addCategory(@RequestBody CategoryRequest category){
+        if(category.getCategoryName() == null)
+            return ResponseEntity.badRequest().body("Category name null");
+        if(category.getDetailCategory() == null)
+            return ResponseEntity.badRequest().body("CategoryDetail null");
         return ResponseEntity.ok(categoryService.addCategory(category));
     }
 

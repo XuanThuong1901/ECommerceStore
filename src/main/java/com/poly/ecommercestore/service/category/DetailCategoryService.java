@@ -26,15 +26,17 @@ public class DetailCategoryService implements IDetailCategoryService{
     @Override
     public DetailCategories addListDetailCategory(DetailCategoryRequest detailCategory) {
 
-        Categories category = categoryRepository.getCategoriesById(detailCategory.getIDCategory());
-        if(category == null){
-            return null;
-        }
+//        Categories category = categoryRepository.getCategoriesById(detailCategory.getIDCategory());
+//        if(category == null){
+//            return null;
+//        }
+//
+//        DetailCategories newDetailCategory = new DetailCategories(detailCategory.getDetailCategoryName(), category);
+//        detailCategoryRepository.save(newDetailCategory);
+//
+//        return newDetailCategory;
 
-        DetailCategories newDetailCategory = new DetailCategories(detailCategory.getDetailCategoryName(), category);
-        detailCategoryRepository.save(newDetailCategory);
-
-        return newDetailCategory;
+        return null;
     }
 
     @Override

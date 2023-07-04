@@ -27,6 +27,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/test/**").permitAll()
+                        .requestMatchers("/category/**").permitAll()
+                        .requestMatchers("/product/**").permitAll()
+                        .requestMatchers("/supplier/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

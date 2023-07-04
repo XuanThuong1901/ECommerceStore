@@ -35,8 +35,10 @@ public class CategoryService implements ICategoryService {
             detailCategoriesList.add(detailCategoryTemp);
         }
 
-        detailCategoryRepository.saveAll(detailCategoriesList);
+        newCategory.setDetailCategories(detailCategoriesList);
         categoryRepository.save(newCategory);
+        detailCategoryRepository.saveAll(detailCategoriesList);
+
         return newCategory;
     }
 

@@ -2,6 +2,7 @@ package com.poly.ecommercestore.request.system;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -12,6 +13,6 @@ public class CategoryRequest {
 
     public CategoryRequest(String categoryName, List<DetailCategoryRequest> detailCategory) {
         this.categoryName = categoryName;
-        this.detailCategory = detailCategory;
+        this.detailCategory = (detailCategory != null) ? detailCategory : new ArrayList<>();
     }
 }

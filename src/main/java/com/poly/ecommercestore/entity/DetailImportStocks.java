@@ -37,8 +37,8 @@ public class DetailImportStocks {
     public DetailImportStocks() {
     }
 
-    public DetailImportStocks(DetailImportStockId detailImportStockId, int quantity, BigDecimal price, ImportStocks importStock, Products product) {
-        this.detailImportStockId = detailImportStockId;
+    public DetailImportStocks(int quantity, BigDecimal price, ImportStocks importStock, Products product) {
+//        this.detailImportStockId = detailImportStockId;
         this.quantity = quantity;
         this.price = price;
         this.importStock = importStock;

@@ -38,9 +38,6 @@ public class Products {
     @Column(name = "Guarantee")
     private String guarantee;
 
-    @Column(name = "Expiry")
-    private String expiry;
-
     @JsonIgnoreProperties("products")
     @Fetch(FetchMode.JOIN)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -80,26 +77,24 @@ public class Products {
     public Products() {
     }
 
-    public Products(String productName, int quantity, BigDecimal price, String feature, String contents, String guarantee, String expiry, DetailCategories detailCategory, Suppliers supplier) {
+    public Products(String productName, int quantity, BigDecimal price, String feature, String contents, String guarantee, DetailCategories detailCategory, Suppliers supplier) {
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
         this.feature = feature;
         this.contents = contents;
         this.guarantee = guarantee;
-        this.expiry = expiry;
         this.detailCategory = detailCategory;
         this.supplier = supplier;
     }
 
-    public Products(String productName, int quantity, BigDecimal price, String feature, String contents, String guarantee, String expiry, DetailCategories detailCategory, Suppliers supplier, List<Specifications> specifications, List<ImageProducts> imageProducts, List<DetailImportStocks> detailImportStocks, List<Carts> carts, List<DetailOrders> detailOrders) {
+    public Products(String productName, int quantity, BigDecimal price, String feature, String contents, String guarantee, DetailCategories detailCategory, Suppliers supplier, List<Specifications> specifications, List<ImageProducts> imageProducts, List<DetailImportStocks> detailImportStocks, List<Carts> carts, List<DetailOrders> detailOrders) {
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
         this.feature = feature;
         this.contents = contents;
         this.guarantee = guarantee;
-        this.expiry = expiry;
         this.detailCategory = detailCategory;
         this.supplier = supplier;
         this.specifications = specifications;

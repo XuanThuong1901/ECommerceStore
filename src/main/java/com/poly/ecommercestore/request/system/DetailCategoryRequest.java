@@ -6,10 +6,11 @@ import lombok.Data;
 public class DetailCategoryRequest {
 
     private String detailCategoryName;
-    private int iDCategory;
 
-    public DetailCategoryRequest(String detailCategoryName, int iDCategory) {
+    public DetailCategoryRequest() {
+    }
+
+    public DetailCategoryRequest(String detailCategoryName) {
         this.detailCategoryName = detailCategoryName;
-        this.iDCategory = iDCategory;
     }
 }

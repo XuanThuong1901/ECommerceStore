@@ -37,8 +37,26 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addProduct(ProductRequest product){
-        return ResponseEntity.ok(productService.addProduct(product));
+    public ResponseEntity<?> addProduct(@RequestBody ProductRequest product){
+        System.out.println(product);
+        if(product.getProductName() == null){
+            return ResponseEntity.badRequest().body("Product not name");
+        }
+        if(product.getQuantity() == null){
+            return ResponseEntity.badRequest().body("Product not quantity");
+        }
+        if(product.getPrice() == null){
+            return ResponseEntity.badRequest().body("Product not price");
+        }
+        if(product.getImageProduct() == null){
+            return ResponseEntity.badRequest().body("Product not image");
+        }
+        if(product.getSpecification() == null){
+            return ResponseEntity.badRequest().body("Product not specification");
+        }
+
+        productService.addProduct(product);
+        return ResponseEntity.ok("Product created");
     }
 
 //    @PostMapping("/update")

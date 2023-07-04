@@ -35,12 +35,12 @@ public class ProductService implements IProductService{
     @Override
     public Products addProduct(ProductRequest product) {
 
-        DetailCategories detailCateTemp = detailCategoryRepository.getReferenceById(product.getIDDetailCategory());
+        DetailCategories detailCateTemp = detailCategoryRepository.getReferenceById(product.getDetailCategory());
         if(detailCateTemp == null){
             return null;
         }
 
-        Suppliers supplier = supplierRepository.getReferenceById(product.getIDSupplier());
+        Suppliers supplier = supplierRepository.getReferenceById(product.getSupplier());
         if(supplier == null){
             return null;
         }
@@ -54,7 +54,6 @@ public class ProductService implements IProductService{
         newProduct.setFeature(product.getFeature());
         newProduct.setContents(product.getContents());
         newProduct.setGuarantee(product.getGuarantee());
-        newProduct.setExpiry(product.getExpiry());
 
         List<ImageProducts> imageProducts = new ArrayList<ImageProducts>();
         for (ImageProductRequest imageProduct : product.getImageProduct()){
@@ -69,9 +68,10 @@ public class ProductService implements IProductService{
         newProduct.setImageProducts(imageProducts);
         newProduct.setSpecifications(specifications);
 
+        productRepository.save(newProduct);
         imageProductRepository.saveAll(imageProducts);
         specificationRepository.saveAll(specifications);
-        productRepository.save(newProduct);
+
 
         return newProduct;
     }
