@@ -51,27 +51,29 @@ public class Products {
     private Suppliers supplier;
 
     @JsonIgnoreProperties("product")
-    @OneToMany(mappedBy = "product")
+    @Fetch(FetchMode.JOIN)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Specifications> specifications;
 
     @JsonIgnoreProperties("product")
-    @OneToMany(mappedBy = "product")
+    @Fetch(FetchMode.JOIN)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<ImageProducts> imageProducts;
 
     @JsonIgnore()
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<DetailImportStocks> detailImportStocks;
 
     @JsonIgnore()
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Carts> carts;
 
     @JsonIgnore()
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<DetailOrders> detailOrders;
 
     @JsonIgnore()
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Evaluations> evaluations;
 
     public Products() {

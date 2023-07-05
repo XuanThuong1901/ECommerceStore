@@ -15,4 +15,14 @@ public class DetailImportStockId implements Serializable {
 
     @Column(name = "IDProduct")
     private int iDProduct;
+
+    public DetailImportStockId() {
+    }
+
+    public DetailImportStockId(int iDImportStock, int iDProduct) {
+        this.iDImportStock = iDImportStock;
+        this.iDProduct = iDProduct;
+    }
+
+
 }

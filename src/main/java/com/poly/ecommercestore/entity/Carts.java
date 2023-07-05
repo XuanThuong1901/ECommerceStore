@@ -33,7 +33,8 @@ public class Carts {
     public Carts() {
     }
 
-    public Carts(int quantity, Customers customer, Products product) {
+    public Carts(CartId cartId, int quantity, Customers customer, Products product) {
+        this.cartId = cartId;
         this.quantity = quantity;
         this.customer = customer;
         this.product = product;

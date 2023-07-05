@@ -14,15 +14,15 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "Customers")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Customers {
 
     @Id
     @Column(name = "IDCustomer")
     private String iDCustomer;
 
-    @JsonIgnoreProperties("carts")
-    @Fetch(FetchMode.JOIN)
     @MapsId
+    @JsonIgnore()
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "IDCustomer")
@@ -37,13 +37,11 @@ public class Customers {
     @Column(name = "Telephone")
     private String telephone;
 
-    @JsonIgnoreProperties("customer")
-    @Fetch(FetchMode.JOIN)
+    @JsonIgnore()
     @OneToMany(mappedBy = "customer")
     private List<Carts> carts;
 
-    @JsonIgnoreProperties("customer")
-    @Fetch(FetchMode.JOIN)
+    @JsonIgnore()
     @OneToMany(mappedBy = "customer")
     private List<Orders> orders;
 

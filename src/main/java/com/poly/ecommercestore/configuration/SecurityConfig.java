@@ -26,10 +26,12 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/test/**").permitAll()
+                        .requestMatchers("/user/**").permitAll()
                         .requestMatchers("/category/**").permitAll()
                         .requestMatchers("/product/**").permitAll()
                         .requestMatchers("/supplier/**").permitAll()
+                        .requestMatchers("/import/**").permitAll()
+                        .requestMatchers("/cart/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

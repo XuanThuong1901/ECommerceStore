@@ -13,9 +13,11 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "ImportStocks")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ImportStocks {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IDImportStock")
     private int iDImportStock;
 
@@ -41,7 +43,7 @@ public class ImportStocks {
     private Suppliers supplier;
 
     @JsonIgnoreProperties("importStock")
-    @OneToMany(mappedBy = "importStock")
+    @OneToMany(mappedBy = "importStock", fetch = FetchType.LAZY)
     private List<DetailImportStocks> detailImportStocks;
 
     public ImportStocks() {

@@ -33,11 +33,11 @@ public class Suppliers {
     private String address;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "supplier")
+    @OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY)
     private List<ImportStocks> importStocks;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "supplier")
+    @OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY)
     private List<Products> products;
 
     public Suppliers() {

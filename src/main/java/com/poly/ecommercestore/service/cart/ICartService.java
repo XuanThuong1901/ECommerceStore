@@ -1,0 +1,17 @@
+package com.poly.ecommercestore.service.cart;
+
+import com.poly.ecommercestore.entity.Carts;
+import com.poly.ecommercestore.request.client.CartRequest;
+
+import java.util.List;
+
+public interface ICartService {
+
+    List<Carts> getCartByCustomer(String iDCustomer);
+
+    Carts addCart(String iDCustomer, int iDProduct, CartRequest cart);
+
+    Boolean deleteCart(String iDCustomer, int iDProduct);
+
+    Boolean updateCart(String iDCustomer, int iDProduct, CartRequest cart);
+}

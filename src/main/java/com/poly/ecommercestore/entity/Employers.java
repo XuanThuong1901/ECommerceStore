@@ -16,6 +16,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "Employers")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employers {
 
     @Id
@@ -23,7 +24,7 @@ public class Employers {
     private String iDEmployer;
 
     @MapsId
-    @JsonIgnoreProperties("employer")
+    @JsonIgnore()
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "IDEmployer")
@@ -50,15 +51,12 @@ public class Employers {
     @Column(name = "Avatar")
     private String avatar;
 
-
-    @JsonIgnoreProperties("employer")
-    @OneToMany(mappedBy = "employer")
-    @Fetch(FetchMode.JOIN)
+    @JsonIgnore()
+    @OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
     private List<Orders> orders;
 
-    @JsonIgnoreProperties("employer")
-    @OneToMany(mappedBy = "employer")
-    @Fetch(FetchMode.JOIN)
+    @JsonIgnore()
+    @OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
     private List<ImportStocks> importStocks;
 
     public Employers() {

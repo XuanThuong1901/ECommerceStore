@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @Data
 @Entity
 @Table(name = "DetailImportStocks")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class DetailImportStocks {
 
     @EmbeddedId
@@ -37,8 +38,8 @@ public class DetailImportStocks {
     public DetailImportStocks() {
     }
 
-    public DetailImportStocks(int quantity, BigDecimal price, ImportStocks importStock, Products product) {
-//        this.detailImportStockId = detailImportStockId;
+    public DetailImportStocks(DetailImportStockId detailImportStockId, int quantity, BigDecimal price, ImportStocks importStock, Products product) {
+        this.detailImportStockId = detailImportStockId;
         this.quantity = quantity;
         this.price = price;
         this.importStock = importStock;

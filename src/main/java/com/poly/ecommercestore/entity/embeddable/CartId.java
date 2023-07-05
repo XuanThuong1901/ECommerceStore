@@ -15,4 +15,12 @@ public class CartId implements Serializable {
 
     @Column(name = "IDProduct")
     private int iDProduct;
+
+    public CartId() {
+    }
+
+    public CartId(String iDCustomer, int iDProduct) {
+        this.iDCustomer = iDCustomer;
+        this.iDProduct = iDProduct;
+    }
 }
