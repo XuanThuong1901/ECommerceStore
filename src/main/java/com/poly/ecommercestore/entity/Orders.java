@@ -38,7 +38,7 @@ public class Orders {
     private Customers customer;
 
     @JsonIgnoreProperties("orders")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "IDEmployer")
     private Employers employer;

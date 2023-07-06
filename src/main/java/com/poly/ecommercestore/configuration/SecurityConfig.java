@@ -34,6 +34,8 @@ public class SecurityConfig {
                         .requestMatchers("/payment/**").permitAll()
                         .requestMatchers("/import/**").permitAll()
                         .requestMatchers("/cart/**").permitAll()
+                        .requestMatchers("/order/**").permitAll()
+                        .requestMatchers("/system/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

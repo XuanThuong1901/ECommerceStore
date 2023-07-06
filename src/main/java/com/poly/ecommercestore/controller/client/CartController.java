@@ -1,4 +1,4 @@
-package com.poly.ecommercestore.controller.user;
+package com.poly.ecommercestore.controller.client;
 
 import com.poly.ecommercestore.request.client.CartRequest;
 import com.poly.ecommercestore.service.cart.CartService;

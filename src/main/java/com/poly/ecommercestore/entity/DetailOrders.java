@@ -1,5 +1,6 @@
 package com.poly.ecommercestore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.poly.ecommercestore.entity.embeddable.DetailOrderId;
 import lombok.*;
@@ -20,7 +21,7 @@ public class DetailOrders {
     private int quantity;
 
 
-    @JsonIgnoreProperties("detailOrders")
+    @JsonIgnore()
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IDOrder", referencedColumnName = "IDOrder", insertable = false, updatable = false)
     private Orders order;

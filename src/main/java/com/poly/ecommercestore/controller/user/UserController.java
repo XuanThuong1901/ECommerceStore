@@ -23,6 +23,7 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+
     @GetMapping("/select/{id}")
     public ResponseEntity<?> getUser(@PathVariable(value = "id") String id){
         return ResponseEntity.ok(employerRepository.getReferenceById(id));
