@@ -2,7 +2,7 @@ package com.poly.ecommercestore.service.shippingunit;
 
 import com.poly.ecommercestore.entity.ShippingUnits;
 import com.poly.ecommercestore.repository.ShippingUnitRepository;
-import com.poly.ecommercestore.request.system.ShippingUnitRequest;
+import com.poly.ecommercestore.DTO.system.ShippingUnitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,21 +20,21 @@ public class ShippingUnitService implements IShippingUnitService{
     }
 
     @Override
-    public ShippingUnits addShippingUnit(ShippingUnitRequest shippingUnit) {
+    public ShippingUnits addShippingUnit(ShippingUnitDTO shippingUnit) {
 
         System.out.println(shippingUnitRepository.getShippingUnits(shippingUnit.getShippingUnitName(), shippingUnit.getEmail(), shippingUnit.getTelephone()));
 
         if(shippingUnitRepository.getShippingUnits(shippingUnit.getShippingUnitName(), shippingUnit.getEmail(), shippingUnit.getTelephone()).size() != 0)
             return null;
 
-        ShippingUnits newShippingUnit = new ShippingUnits(shippingUnit.getShippingUnitName(), shippingUnit.getEmail(), shippingUnit.getTelephone(), shippingUnit.getAddress(), shippingUnit.getShippingCost());
+        ShippingUnits newShippingUnit = new ShippingUnits(shippingUnit.getShippingUnitName(), shippingUnit.getEmail(), shippingUnit.getTelephone(), shippingUnit.getAddress());
         shippingUnitRepository.save(newShippingUnit);
 
         return newShippingUnit;
     }
 
     @Override
-    public Boolean updateShippingUnit(ShippingUnitRequest shippingUnit, int iDShippingUnit) {
+    public Boolean updateShippingUnit(ShippingUnitDTO shippingUnit, int iDShippingUnit) {
 
         ShippingUnits updateShippingUnit = shippingUnitRepository.getReferenceById(iDShippingUnit);
 
@@ -45,7 +45,6 @@ public class ShippingUnitService implements IShippingUnitService{
         updateShippingUnit.setEmail(shippingUnit.getEmail());
         updateShippingUnit.setTelephone(shippingUnit.getTelephone());
         updateShippingUnit.setAddress(shippingUnit.getAddress());
-        updateShippingUnit.setShippingCost(shippingUnit.getShippingCost());
 
         if (shippingUnitRepository.save(updateShippingUnit) == null)
             return false;

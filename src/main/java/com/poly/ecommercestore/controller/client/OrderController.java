@@ -1,6 +1,6 @@
 package com.poly.ecommercestore.controller.client;
 
-import com.poly.ecommercestore.request.client.OrderRequest;
+import com.poly.ecommercestore.DTO.client.OrderDTO;
 import com.poly.ecommercestore.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getAllOrderByCustomer(@PathVariable(value = "id") String idCustomer){
         return ResponseEntity.ok(orderService.getOrderByCustomer(idCustomer));
@@ -24,7 +25,7 @@ public class OrderController {
     }
 
     @PostMapping("/add/customer={idCustomer}")
-    public ResponseEntity<?> addOrder(@RequestBody OrderRequest order, @PathVariable(value = "idCustomer") String idCustomer){
+    public ResponseEntity<?> addOrder(@RequestBody OrderDTO order, @PathVariable(value = "idCustomer") String idCustomer){
 
         if(order.getDetailOrders().size() == 0)
             return ResponseEntity.badRequest().body("Order have not detail order");

@@ -1,6 +1,6 @@
 package com.poly.ecommercestore.controller.system;
 
-import com.poly.ecommercestore.request.system.PaymentRequest;
+import com.poly.ecommercestore.DTO.system.PaymentDTO;
 import com.poly.ecommercestore.service.payment.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class PaymentController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addPayment(@RequestBody PaymentRequest payment){
+    public ResponseEntity<?> addPayment(@RequestBody PaymentDTO payment){
 
         if(payment.getPaymentName() == null || payment.getPaymentName().equals("")){
             return ResponseEntity.badRequest().body("Payment not name");
@@ -32,7 +32,7 @@ public class PaymentController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<?> updatePayment(@RequestBody PaymentRequest payment, @PathVariable(value = "id") int idPayment){
+    public ResponseEntity<?> updatePayment(@RequestBody PaymentDTO payment, @PathVariable(value = "id") int idPayment){
 
         if(payment.getPaymentName() == null || payment.getPaymentName().equals("")){
             return ResponseEntity.badRequest().body("Payment not name");

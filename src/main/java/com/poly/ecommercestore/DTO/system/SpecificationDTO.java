@@ -1,17 +1,17 @@
-package com.poly.ecommercestore.request.system;
+package com.poly.ecommercestore.DTO.system;
 
 import lombok.Data;
 
 @Data
-public class SpecificationRequest {
+public class SpecificationDTO {
 
     private String specificationName;
     private String parameter;
 
-    public SpecificationRequest() {
+    public SpecificationDTO() {
     }
 
-    public SpecificationRequest(String specificationName, String parameter) {
+    public SpecificationDTO(String specificationName, String parameter) {
         this.specificationName = specificationName;
         this.parameter = parameter;
     }

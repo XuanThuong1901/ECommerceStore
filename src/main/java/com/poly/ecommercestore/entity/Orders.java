@@ -19,8 +19,8 @@ public class Orders {
     @Column(name = "IDOrder")
     private int iDOrder;
 
-    @Column(name = "Price")
-    private BigDecimal price;
+    @Column(name = "Amount")
+    private BigDecimal amount;
 
     @Column(name = "Address")
     private String address;
@@ -30,6 +30,15 @@ public class Orders {
 
     @Column(name = "Note")
     private String note;
+
+    @Column(name = "ShippingFee")
+    private BigDecimal shippingFee;
+
+    @Column(name = "TaxAmount ")
+    private BigDecimal taxAmount  ;
+
+    @Column(name = "DiscountAmount")
+    private BigDecimal discountAmount ;
 
     @JsonIgnoreProperties("orders")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -58,8 +67,8 @@ public class Orders {
     @JsonIgnoreProperties("orders")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "IDStatusOrder")
-    private StatusOrders statusOrder;
+    @JoinColumn(name = "IDStatus")
+    private Status status;
 
     @JsonIgnoreProperties("order")
     @OneToMany(mappedBy = "order")
@@ -68,8 +77,8 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(BigDecimal price, String address, String telephone, String note, Customers customer, Employers employer, ShippingUnits shippingUnit, Payments payment, StatusOrders statusOrder) {
-        this.price = price;
+    public Orders(BigDecimal amount, String address, String telephone, String note, Customers customer, Employers employer, ShippingUnits shippingUnit, Payments payment, Status status) {
+        this.amount = amount;
         this.address = address;
         this.telephone = telephone;
         this.note = note;
@@ -77,11 +86,11 @@ public class Orders {
         this.employer = employer;
         this.shippingUnit = shippingUnit;
         this.payment = payment;
-        this.statusOrder = statusOrder;
+        this.status = status;
     }
 
-    public Orders(BigDecimal price, String address, String telephone, String note, Customers customer, Employers employer, ShippingUnits shippingUnit, Payments payment, StatusOrders statusOrder, List<DetailOrders> detailOrders) {
-        this.price = price;
+    public Orders(BigDecimal amount, String address, String telephone, String note, Customers customer, Employers employer, ShippingUnits shippingUnit, Payments payment, Status status, List<DetailOrders> detailOrders) {
+        this.amount = amount;
         this.address = address;
         this.telephone = telephone;
         this.note = note;
@@ -89,7 +98,7 @@ public class Orders {
         this.employer = employer;
         this.shippingUnit = shippingUnit;
         this.payment = payment;
-        this.statusOrder = statusOrder;
+        this.status = status;
         this.detailOrders = detailOrders;
     }
 }

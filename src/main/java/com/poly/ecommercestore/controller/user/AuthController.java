@@ -2,8 +2,8 @@ package com.poly.ecommercestore.controller.user;
 
 import com.poly.ecommercestore.entity.Accounts;
 import com.poly.ecommercestore.repository.AccountRepository;
-import com.poly.ecommercestore.request.client.AccountRequest;
-import com.poly.ecommercestore.request.client.UserRequest;
+import com.poly.ecommercestore.DTO.client.AccountDTO;
+import com.poly.ecommercestore.DTO.client.UserDTO;
 import com.poly.ecommercestore.service.user.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/register/{permission}")
-    public ResponseEntity<String> register(UserRequest user, @PathVariable(value = "permission") String permission){
+    public ResponseEntity<String> register(UserDTO user, @PathVariable(value = "permission") String permission){
         if(accountRepository.getByEmail(user.getEmail()) != null){
             return ResponseEntity.badRequest().body("Email already in use.");
         }
@@ -31,7 +31,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Accounts login(AccountRequest loginRequest){
+    public Accounts login(AccountDTO loginRequest){
         try {
             Accounts account = authService.getAccountByLogin(loginRequest.getEmail(), loginRequest.getPassword());
             if(account != null)

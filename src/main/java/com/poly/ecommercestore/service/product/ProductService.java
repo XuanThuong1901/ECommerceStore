@@ -1,10 +1,11 @@
 package com.poly.ecommercestore.service.product;
 
+import com.poly.ecommercestore.DTO.system.PriceListDTO;
 import com.poly.ecommercestore.entity.*;
 import com.poly.ecommercestore.repository.*;
-import com.poly.ecommercestore.request.system.ImageProductRequest;
-import com.poly.ecommercestore.request.system.ProductRequest;
-import com.poly.ecommercestore.request.system.SpecificationRequest;
+import com.poly.ecommercestore.DTO.system.ImageProductDTO;
+import com.poly.ecommercestore.DTO.system.ProductDTO;
+import com.poly.ecommercestore.DTO.system.SpecificationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,10 +19,13 @@ import java.util.List;
 public class ProductService implements IProductService{
 
     @Autowired
+    private PriceListService priceListService;
+
+    @Autowired
     private ProductRepository productRepository;
 
     @Autowired
-    private DetailCategoryRepository detailCategoryRepository;
+    private CategoryRepository categoryRepository;
 
     @Autowired
     private ImageProductRepository imageProductRepository;
@@ -33,10 +37,10 @@ public class ProductService implements IProductService{
     private SupplierRepository supplierRepository;
 
     @Override
-    public Products addProduct(ProductRequest product) {
+    public Products addProduct(ProductDTO product, String iDEmployer) {
 
-        DetailCategories detailCateTemp = detailCategoryRepository.getReferenceById(product.getDetailCategory());
-        if(detailCateTemp == null){
+        Categories category = categoryRepository.getReferenceById(product.getCategory());
+        if(category == null){
             return null;
         }
 
@@ -47,24 +51,32 @@ public class ProductService implements IProductService{
 
         Products newProduct = new Products();
         newProduct.setProductName(product.getProductName());
-        newProduct.setDetailCategory(detailCateTemp);
+        newProduct.setCategory(category);
         newProduct.setSupplier(supplier);
         newProduct.setQuantity(product.getQuantity());
-        newProduct.setPrice(product.getPrice());
         newProduct.setFeature(product.getFeature());
         newProduct.setContents(product.getContents());
         newProduct.setGuarantee(product.getGuarantee());
 
+        newProduct = productRepository.save(newProduct);
+
+        List<PriceLists> priceLists = new ArrayList<>();
+        for (PriceListDTO priceListDTO : product.getPriceListDTOS()){
+            PriceLists priceListsTemp = priceListService.addPriceList(priceListDTO, iDEmployer, newProduct.getIDProduct());
+            priceLists.add(priceListsTemp);
+        }
+
         List<ImageProducts> imageProducts = new ArrayList<ImageProducts>();
-        for (ImageProductRequest imageProduct : product.getImageProduct()){
+        for (ImageProductDTO imageProduct : product.getImageProduct()){
             ImageProducts imageProductTemp = new ImageProducts(imageProduct.getUrl(), newProduct);
             imageProducts.add(imageProductTemp);
         }
         List<Specifications> specifications = new ArrayList<Specifications>();
-        for (SpecificationRequest specification : product.getSpecification()){
+        for (SpecificationDTO specification : product.getSpecification()){
             Specifications specificationTemp = new Specifications(specification.getSpecificationName(), specification.getParameter(), newProduct);
             specifications.add(specificationTemp);
         }
+        newProduct.setPriceLists(priceLists);
         newProduct.setImageProducts(imageProducts);
         newProduct.setSpecifications(specifications);
 
@@ -77,7 +89,7 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public Boolean updateProduct(ProductRequest product, int iDProduct) {
+    public Boolean updateProduct(ProductDTO product, int iDProduct) {
         return null;
     }
 
@@ -105,9 +117,9 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public Page<Products> getProductByDetailCategoryByPage(int iDDetailCategory, int page, int size) {
+    public Page<Products> getProductByCategoryByPage(int iDCategory, int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size);
-        return productRepository.getProductsByDetailCategoryByPage(iDDetailCategory, pageable);
+        return productRepository.getProductsByCategoryByPage(iDCategory, pageable);
     }
 }

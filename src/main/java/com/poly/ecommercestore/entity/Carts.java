@@ -7,6 +7,8 @@ import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import java.util.Date;
+
 @Data
 @Entity
 @Table(name = "Carts")
@@ -14,6 +16,12 @@ public class Carts {
 
     @EmbeddedId
     private CartId cartId;
+
+    @Column(name = "Status")
+    private Boolean status;
+
+    @Column(name = "UpdatedDate")
+    private Date updatedDate;
 
     @Column(name = "Quantity")
     private int quantity;
@@ -33,8 +41,10 @@ public class Carts {
     public Carts() {
     }
 
-    public Carts(CartId cartId, int quantity, Customers customer, Products product) {
+    public Carts(CartId cartId, Boolean status, Date updatedDate, int quantity, Customers customer, Products product) {
         this.cartId = cartId;
+        this.status = status;
+        this.updatedDate = updatedDate;
         this.quantity = quantity;
         this.customer = customer;
         this.product = product;

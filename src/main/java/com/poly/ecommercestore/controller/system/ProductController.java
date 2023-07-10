@@ -1,7 +1,7 @@
 package com.poly.ecommercestore.controller.system;
 
 import com.poly.ecommercestore.repository.ProductRepository;
-import com.poly.ecommercestore.request.system.ProductRequest;
+import com.poly.ecommercestore.DTO.system.ProductDTO;
 import com.poly.ecommercestore.service.product.ProductService;
 import com.poly.ecommercestore.service.shared.ECommerceMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class ProductController {
 
     @GetMapping("/detailCategory={id}/{page}")
     public ResponseEntity<?> getProductByDetailCategoryByPage(@PathVariable(value = "id") int id, @PathVariable(value = "page") int page){
-        return ResponseEntity.ok(productService.getProductByDetailCategoryByPage(id, page, SIZE));
+        return ResponseEntity.ok(productService.getProductByCategoryByPage(id, page, SIZE));
     }
 
     @GetMapping("/{id}")
@@ -36,8 +36,8 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addProduct(@RequestBody ProductRequest product){
+    @PostMapping("/add/employer={id}")
+    public ResponseEntity<?> addProduct(@RequestBody ProductDTO product, @PathVariable(value = "id") String iDEmp){
         System.out.println(product);
         if(product.getProductName() == null){
             return ResponseEntity.badRequest().body("Product not name");
@@ -45,7 +45,7 @@ public class ProductController {
         if(product.getQuantity() == null){
             return ResponseEntity.badRequest().body("Product not quantity");
         }
-        if(product.getPrice() == null){
+        if(product.getPriceListDTOS() == null){
             return ResponseEntity.badRequest().body("Product not price");
         }
         if(product.getImageProduct() == null){
@@ -55,7 +55,7 @@ public class ProductController {
             return ResponseEntity.badRequest().body("Product not specification");
         }
 
-        productService.addProduct(product);
+        productService.addProduct(product, iDEmp);
         return ResponseEntity.ok("Product created");
     }
 

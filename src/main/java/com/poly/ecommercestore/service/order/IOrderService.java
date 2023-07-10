@@ -1,7 +1,7 @@
 package com.poly.ecommercestore.service.order;
 
 import com.poly.ecommercestore.entity.Orders;
-import com.poly.ecommercestore.request.client.OrderRequest;
+import com.poly.ecommercestore.DTO.client.OrderDTO;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface IOrderService {
 
     List<Orders> getAllOrder();
 
-    Orders addOrder(OrderRequest orderCustomerRequest, String iDCustomer);
+    Orders addOrder(OrderDTO orderCustomerRequest, String iDCustomer);
 
     Boolean statusConfirmedOrder(int iDOrder);
 

@@ -1,16 +1,14 @@
 package com.poly.ecommercestore.service.product;
 
 import com.poly.ecommercestore.entity.Products;
-import com.poly.ecommercestore.request.system.ProductRequest;
+import com.poly.ecommercestore.DTO.system.ProductDTO;
 import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 public interface IProductService {
 
-    Products addProduct(ProductRequest product);
+    Products addProduct(ProductDTO product, String iDEmployer);
 
-    Boolean updateProduct(ProductRequest product, int iDProduct);
+    Boolean updateProduct(ProductDTO product, int iDProduct);
 
     Boolean removeProduct(int iDProduct);
 
@@ -18,6 +16,6 @@ public interface IProductService {
 
     Page<Products> getProductByPage(int page, int size);
 
-    Page<Products> getProductByDetailCategoryByPage(int iDDetailCategory, int page, int size);
+    Page<Products> getProductByCategoryByPage(int iDDetailCategory, int page, int size);
 
 }

@@ -1,11 +1,11 @@
 package com.poly.ecommercestore.service.user;
 
 import com.poly.ecommercestore.entity.Accounts;
-import com.poly.ecommercestore.request.client.UserRequest;
+import com.poly.ecommercestore.DTO.client.UserDTO;
 
 public interface IAuthService {
 
-    public Accounts createUser(UserRequest user, String permission);
+    public Accounts createUser(UserDTO user, String permission);
 
     public Accounts getAccountByLogin(String email, String password);
 

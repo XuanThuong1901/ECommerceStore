@@ -1,11 +1,11 @@
-package com.poly.ecommercestore.request.client;
+package com.poly.ecommercestore.DTO.client;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class UserRequest {
+public class UserDTO {
 
     private String userId;
     private String email;
@@ -28,7 +28,7 @@ public class UserRequest {
 //        this.position = position;
 //    }
 
-    public UserRequest(String userId, String email, String password, String name, Date birthday, String address, Boolean gender, String telephone, String identityCard, String avatar, int role) {
+    public UserDTO(String userId, String email, String password, String name, Date birthday, String address, Boolean gender, String telephone, String identityCard, String avatar, int role) {
         this.userId = (userId != null) ? userId : "N/A";
         this.email = email;
         this.password = password;

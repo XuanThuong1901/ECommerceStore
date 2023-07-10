@@ -30,6 +30,9 @@ public class ImportStocks {
     @Column(name = "DateAdded")
     private Date dateAdded;
 
+    @Column(name = "UpdatedDate")
+    private Date updatedDate;
+
     @JsonIgnoreProperties("importStocks")
     @Fetch(FetchMode.JOIN)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -42,6 +45,11 @@ public class ImportStocks {
     @JoinColumn(name = "IDSupplier")
     private Suppliers supplier;
 
+    @ManyToOne(optional = false)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "IDStatus")
+    private Status status;
+
     @JsonIgnoreProperties("importStock")
     @OneToMany(mappedBy = "importStock", fetch = FetchType.LAZY)
     private List<DetailImportStocks> detailImportStocks;
@@ -49,21 +57,13 @@ public class ImportStocks {
     public ImportStocks() {
     }
 
-    public ImportStocks(int iDImportStock, String importStockName, String contents, Date dateAdded, Employers employer, Suppliers supplier) {
+    public ImportStocks(int iDImportStock, String importStockName, String contents, Date dateAdded, Date updatedDate,Employers employer, Suppliers supplier) {
         this.iDImportStock = iDImportStock;
         this.importStockName = importStockName;
         this.contents = contents;
         this.dateAdded = dateAdded;
+        this.updatedDate = updatedDate;
         this.employer = employer;
         this.supplier = supplier;
-    }
-
-    public ImportStocks(int iDImportStock, String importStockName, String contents, Date dateAdded, Employers employer, List<DetailImportStocks> detailImportStocks) {
-        this.iDImportStock = iDImportStock;
-        this.importStockName = importStockName;
-        this.contents = contents;
-        this.dateAdded = dateAdded;
-        this.employer = employer;
-        this.detailImportStocks = detailImportStocks;
     }
 }

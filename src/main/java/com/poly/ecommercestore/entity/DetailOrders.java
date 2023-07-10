@@ -9,6 +9,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
 @Table(name = "DetailOrders")
@@ -20,6 +22,11 @@ public class DetailOrders {
     @Column(name = "Quantity")
     private int quantity;
 
+    @Column(name = "Price")
+    private BigDecimal price;
+
+    @Column(name = "LineAmount")
+    private BigDecimal lineAmount;
 
     @JsonIgnore()
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -31,13 +38,21 @@ public class DetailOrders {
     @JoinColumn(name = "IDProduct", referencedColumnName = "IDProduct", insertable = false, updatable = false)
     private Products product;
 
+    @JsonIgnoreProperties("detailOrders")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "IDTax")
+    private Tax tax;
+
     public DetailOrders() {
     }
 
-    public DetailOrders(DetailOrderId detailOrderId, int quantity, Orders order, Products product) {
+    public DetailOrders(DetailOrderId detailOrderId, int quantity, BigDecimal price, BigDecimal lineAmount, Orders order, Products product, Tax tax) {
         this.detailOrderId = detailOrderId;
         this.quantity = quantity;
+        this.price = price;
+        this.lineAmount = lineAmount;
         this.order = order;
         this.product = product;
+        this.tax = tax;
     }
 }

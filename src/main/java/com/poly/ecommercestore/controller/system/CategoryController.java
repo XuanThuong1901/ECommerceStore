@@ -1,11 +1,8 @@
 package com.poly.ecommercestore.controller.system;
 
-import com.poly.ecommercestore.entity.Categories;
 import com.poly.ecommercestore.repository.CategoryRepository;
-import com.poly.ecommercestore.repository.DetailCategoryRepository;
-import com.poly.ecommercestore.request.system.CategoryRequest;
+import com.poly.ecommercestore.DTO.system.CategoryDTO;
 import com.poly.ecommercestore.service.category.CategoryService;
-import com.poly.ecommercestore.service.category.DetailCategoryService;
 import com.poly.ecommercestore.service.shared.ECommerceMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +15,6 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @Autowired
-    private DetailCategoryService detailCategoryService;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -30,11 +25,10 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addCategory(@RequestBody CategoryRequest category){
+    public ResponseEntity<?> addCategory(@RequestBody CategoryDTO category){
         if(category.getCategoryName() == null)
             return ResponseEntity.badRequest().body("Category name null");
-        if(category.getDetailCategory() == null)
-            return ResponseEntity.badRequest().body("CategoryDetail null");
+
         return ResponseEntity.ok(categoryService.addCategory(category));
     }
 

@@ -13,11 +13,11 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Products, Integer> {
 
-    @Query("SELECT product FROM Products product WHERE product.detailCategory.iDDetailCategory = :iDDetailCategory")
-    List<Products> getProductsByDetailCategory(@Param("iDDetailCategory") int iDDetailCategory);
+    @Query("SELECT product FROM Products product WHERE product.category.iDCategory = :iDCategory")
+    List<Products> getProductsByCategory(@Param("iDCategory") int iDCategory);
 
-    @Query("SELECT product FROM Products product WHERE product.detailCategory.iDDetailCategory = :iDDetailCategory ORDER BY product.iDProduct ASC")
-    Page<Products> getProductsByDetailCategoryByPage(@Param("iDDetailCategory") int iDDetailCategory, Pageable pageable);
+    @Query("SELECT product FROM Products product WHERE product.category.iDCategory = :iDCategory ORDER BY product.iDProduct ASC")
+    Page<Products> getProductsByCategoryByPage(@Param("iDCategory") int iDCategory, Pageable pageable);
 
     @Query("SELECT product FROM Products product ORDER BY product.iDProduct ASC")
     Page<Products> getProductsByPage(Pageable pageable);

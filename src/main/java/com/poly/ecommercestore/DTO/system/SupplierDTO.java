@@ -1,9 +1,9 @@
-package com.poly.ecommercestore.request.system;
+package com.poly.ecommercestore.DTO.system;
 
 import lombok.Data;
 
 @Data
-public class SupplierRequest {
+public class SupplierDTO {
 
     private String supplierName;
 
@@ -13,10 +13,10 @@ public class SupplierRequest {
 
     private String address;
 
-    public SupplierRequest() {
+    public SupplierDTO() {
     }
 
-    public SupplierRequest(String supplierName, String email, String telephone, String address) {
+    public SupplierDTO(String supplierName, String email, String telephone, String address) {
         this.supplierName = supplierName;
         this.email = email;
         this.telephone = telephone;

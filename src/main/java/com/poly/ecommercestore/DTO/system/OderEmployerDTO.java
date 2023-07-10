@@ -1,6 +1,6 @@
-package com.poly.ecommercestore.request.system;
+package com.poly.ecommercestore.DTO.system;
 
-import com.poly.ecommercestore.request.client.DetailOrderRequest;
+import com.poly.ecommercestore.DTO.client.DetailOrderDTO;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class OderEmployerRequest {
+public class OderEmployerDTO {
 
     private BigDecimal price;
     private String address;
@@ -19,12 +19,12 @@ public class OderEmployerRequest {
     private Integer shippingUnit;
     private Integer payment;
     private Integer statusOrder;
-    private List<DetailOrderRequest> detailOrders;
+    private List<DetailOrderDTO> detailOrders;
 
-    public OderEmployerRequest() {
+    public OderEmployerDTO() {
     }
 
-    public OderEmployerRequest(BigDecimal price, String address, String telephone, String note, String customer, String employer, Integer shippingUnit, Integer payment, Integer statusOrder, List<DetailOrderRequest> detailOrders) {
+    public OderEmployerDTO(BigDecimal price, String address, String telephone, String note, String customer, String employer, Integer shippingUnit, Integer payment, Integer statusOrder, List<DetailOrderDTO> detailOrders) {
         this.price = (price != null) ? price : null;
         this.address = (address != null) ? address : "N/A";
         this.telephone = (telephone != null) ? telephone : "N/A";

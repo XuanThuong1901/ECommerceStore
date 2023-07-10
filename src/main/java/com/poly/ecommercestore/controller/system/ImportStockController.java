@@ -1,6 +1,6 @@
 package com.poly.ecommercestore.controller.system;
 
-import com.poly.ecommercestore.request.system.ImportStockRequest;
+import com.poly.ecommercestore.DTO.system.ImportStockDTO;
 import com.poly.ecommercestore.service.importstock.ImportStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class ImportStockController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addImport(@RequestBody ImportStockRequest importStock){
+    public ResponseEntity<?> addImport(@RequestBody ImportStockDTO importStock){
         if(importStock.getImportStockName() == null){
             return ResponseEntity.badRequest().body("Import not name");
         }

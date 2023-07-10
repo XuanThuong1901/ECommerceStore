@@ -2,8 +2,8 @@ package com.poly.ecommercestore.service.user;
 
 import com.poly.ecommercestore.entity.*;
 import com.poly.ecommercestore.repository.*;
-import com.poly.ecommercestore.request.client.AccountRequest;
-import com.poly.ecommercestore.request.client.UserRequest;
+import com.poly.ecommercestore.DTO.client.AccountDTO;
+import com.poly.ecommercestore.DTO.client.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class UserService implements  IUserService{
     private EmployerRepository employerRepository;
 
     @Override
-    public Object updateUser(UserRequest user) {
+    public Object updateUser(UserDTO user) {
 
         String keyId = user.getUserId().substring(0,3);
 
@@ -62,7 +62,7 @@ public class UserService implements  IUserService{
     }
 
     @Override
-    public Accounts updatePassword(AccountRequest account) {
+    public Accounts updatePassword(AccountDTO account) {
         Accounts updateAccount = accountRepository.getByEmail(account.getEmail());
         if(updateAccount != null){
             updateAccount.setPassword(account.getPassword());

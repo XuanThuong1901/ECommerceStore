@@ -1,6 +1,6 @@
 package com.poly.ecommercestore.controller.system;
 
-import com.poly.ecommercestore.request.system.SupplierRequest;
+import com.poly.ecommercestore.DTO.system.SupplierDTO;
 import com.poly.ecommercestore.service.shared.ECommerceMessage;
 import com.poly.ecommercestore.service.supplier.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class SupplierController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addSupplier(@RequestBody SupplierRequest supplier){
+    public ResponseEntity<?> addSupplier(@RequestBody SupplierDTO supplier){
         if(supplier.getSupplierName() == null){
             return ResponseEntity.badRequest().body("Supplier not name");
         }
@@ -39,7 +39,7 @@ public class SupplierController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<?> updateSupplier(@RequestBody SupplierRequest supplier, @PathVariable(value = "id") int id){
+    public ResponseEntity<?> updateSupplier(@RequestBody SupplierDTO supplier, @PathVariable(value = "id") int id){
 
         if(supplier.getSupplierName() == null){
             return ResponseEntity.badRequest().body("Supplier not name");

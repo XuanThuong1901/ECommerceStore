@@ -59,6 +59,10 @@ public class Employers {
     @OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
     private List<ImportStocks> importStocks;
 
+    @JsonIgnore()
+    @OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
+    private List<PriceLists> priceLists;
+
     public Employers() {
     }
 

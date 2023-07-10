@@ -2,8 +2,8 @@ package com.poly.ecommercestore.controller.user;
 
 import com.poly.ecommercestore.repository.AccountRepository;
 import com.poly.ecommercestore.repository.EmployerRepository;
-import com.poly.ecommercestore.request.client.AccountRequest;
-import com.poly.ecommercestore.request.client.UserRequest;
+import com.poly.ecommercestore.DTO.client.AccountDTO;
+import com.poly.ecommercestore.DTO.client.UserDTO;
 import com.poly.ecommercestore.service.shared.ECommerceMessage;
 import com.poly.ecommercestore.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/updateUser/{id}")
-    public ResponseEntity<String> updateUser(UserRequest user, @PathVariable(value = "id") String iDUser){
+    public ResponseEntity<String> updateUser(UserDTO user, @PathVariable(value = "id") String iDUser){
         if(accountRepository.getById(iDUser) != null){
             userService.updateUser(user);
             return ResponseEntity.badRequest().body(ECommerceMessage.USER_SUCCESSFUL);
@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("updatePassword/{email}")
-    public ResponseEntity<String> updatePass(AccountRequest account, @PathVariable(value = "email") String email){
+    public ResponseEntity<String> updatePass(AccountDTO account, @PathVariable(value = "email") String email){
         if(accountRepository.getByEmail(email) != null){
             userService.updatePassword(account);
             return ResponseEntity.badRequest().body(ECommerceMessage.ACOUNT_SUCCESSFUL);

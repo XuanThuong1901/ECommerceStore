@@ -13,6 +13,8 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "Products")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class Products {
 
     @Id
@@ -26,9 +28,6 @@ public class Products {
     @Column(name = "Quantity")
     private int quantity;
 
-    @Column(name = "Price")
-    private BigDecimal price;
-
     @Column(name = "Feature")
     private String feature;
 
@@ -41,14 +40,25 @@ public class Products {
     @JsonIgnoreProperties("products")
     @Fetch(FetchMode.JOIN)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "IDDetailCategory")
-    private DetailCategories detailCategory;
+    @JoinColumn(name = "IDCategory")
+    private Categories category;
 
     @JsonIgnoreProperties("products")
     @Fetch(FetchMode.JOIN)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IDSupplier")
     private Suppliers supplier;
+
+    @JsonIgnoreProperties("products")
+    @Fetch(FetchMode.JOIN)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "IDTax")
+    private Tax tax;
+
+    @JsonIgnoreProperties("product")
+    @Fetch(FetchMode.JOIN)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<PriceLists> priceLists;
 
     @JsonIgnoreProperties("product")
     @Fetch(FetchMode.JOIN)
@@ -79,26 +89,25 @@ public class Products {
     public Products() {
     }
 
-    public Products(String productName, int quantity, BigDecimal price, String feature, String contents, String guarantee, DetailCategories detailCategory, Suppliers supplier) {
+    public Products(String productName, int quantity, String feature, String contents, String guarantee, Categories category, Suppliers supplier) {
         this.productName = productName;
         this.quantity = quantity;
-        this.price = price;
         this.feature = feature;
         this.contents = contents;
         this.guarantee = guarantee;
-        this.detailCategory = detailCategory;
+        this.category = category;
         this.supplier = supplier;
     }
 
-    public Products(String productName, int quantity, BigDecimal price, String feature, String contents, String guarantee, DetailCategories detailCategory, Suppliers supplier, List<Specifications> specifications, List<ImageProducts> imageProducts, List<DetailImportStocks> detailImportStocks, List<Carts> carts, List<DetailOrders> detailOrders) {
+    public Products(String productName, int quantity, String feature, String contents, String guarantee, Categories category, Suppliers supplier, List<PriceLists> priceLists, List<Specifications> specifications, List<ImageProducts> imageProducts, List<DetailImportStocks> detailImportStocks, List<Carts> carts, List<DetailOrders> detailOrders) {
         this.productName = productName;
         this.quantity = quantity;
-        this.price = price;
         this.feature = feature;
         this.contents = contents;
         this.guarantee = guarantee;
-        this.detailCategory = detailCategory;
+        this.category = category;
         this.supplier = supplier;
+        this.priceLists = priceLists;
         this.specifications = specifications;
         this.imageProducts = imageProducts;
         this.detailImportStocks = detailImportStocks;

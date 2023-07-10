@@ -1,4 +1,4 @@
-package com.poly.ecommercestore.request.system;
+package com.poly.ecommercestore.DTO.system;
 
 import lombok.Data;
 
@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class ImportStockRequest {
+public class ImportStockDTO {
     private String importStockName;
     private String contents;
     private String employer;
     private Integer supplier;
-    private List<DetailImportRequest> detailImportStocks;
+    private List<DetailImportDTO> detailImportStocks;
 
-    public ImportStockRequest() {
+    public ImportStockDTO() {
     }
 
-    public ImportStockRequest(String importStockName, String contents, String employer, Integer supplier, List<DetailImportRequest> detailImportStocks) {
+    public ImportStockDTO(String importStockName, String contents, String employer, Integer supplier, List<DetailImportDTO> detailImportStocks) {
         this.importStockName = importStockName;
         this.contents = (contents != null) ? contents : "N/A";
         this.employer = employer;

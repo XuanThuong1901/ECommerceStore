@@ -1,6 +1,6 @@
 package com.poly.ecommercestore.controller.client;
 
-import com.poly.ecommercestore.request.client.CartRequest;
+import com.poly.ecommercestore.DTO.client.CartDTO;
 import com.poly.ecommercestore.service.cart.CartService;
 import com.poly.ecommercestore.service.shared.ECommerceMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class CartController {
     }
 
     @PostMapping("/add/customer={idCustomer}/product={idProduct}")
-    public ResponseEntity<?> addCart(@RequestBody CartRequest cart, @PathVariable(value = "idCustomer") String idCustomer, @PathVariable(value = "idProduct") int idProduct){
+    public ResponseEntity<?> addCart(@RequestBody CartDTO cart, @PathVariable(value = "idCustomer") String idCustomer, @PathVariable(value = "idProduct") int idProduct){
         if(cart.getQuantity() == null || cart.getQuantity() == 0)
             return ResponseEntity.badRequest().body("have not quantity");
 
@@ -31,7 +31,7 @@ public class CartController {
     }
 
     @PostMapping("/update/customer={idCustomer}/product={idProduct}")
-    public ResponseEntity<?> updateCart(@RequestBody CartRequest cart, @PathVariable(value = "idCustomer") String idCustomer, @PathVariable(value = "idProduct") int idProduct){
+    public ResponseEntity<?> updateCart(@RequestBody CartDTO cart, @PathVariable(value = "idCustomer") String idCustomer, @PathVariable(value = "idProduct") int idProduct){
         if(cart.getQuantity() == null || cart.getQuantity() == 0)
             return ResponseEntity.badRequest().body("have not quantity");
 

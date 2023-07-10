@@ -3,11 +3,8 @@ package com.poly.ecommercestore.service.importstock;
 import com.poly.ecommercestore.entity.*;
 import com.poly.ecommercestore.entity.embeddable.DetailImportStockId;
 import com.poly.ecommercestore.repository.*;
-import com.poly.ecommercestore.request.system.DetailImportRequest;
-import com.poly.ecommercestore.request.system.ImportStockRequest;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import com.poly.ecommercestore.DTO.system.DetailImportDTO;
+import com.poly.ecommercestore.DTO.system.ImportStockDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,10 +30,15 @@ public class ImportStockService implements IImportStockService{
     @Autowired
     private ProductRepository productRepository;
 
-    @Override
-    public ImportStocks addImportStock(ImportStockRequest importStock) {
+    @Autowired
+    private StatusRepository statusRepository;
 
-        System.out.println(importStock);
+    private final int PROCESSING = 9;
+    private final int COMPLETED = 10;
+
+    @Override
+    public ImportStocks addImportStock(ImportStockDTO importStock) {
+
         if(importStock.getDetailImportStocks() == null)
             return null;
 
@@ -48,17 +50,23 @@ public class ImportStockService implements IImportStockService{
         if(supplier == null)
             return null;
 
+        Status status = statusRepository.getReferenceById(PROCESSING);
+        if(supplier == null)
+            return null;
+
         ImportStocks newImportStock = new ImportStocks();
         newImportStock.setEmployer(employer);
         newImportStock.setSupplier(supplier);
+        newImportStock.setStatus(status);
         newImportStock.setImportStockName(importStock.getImportStockName());
         newImportStock.setContents(importStock.getContents());
         newImportStock.setDateAdded(new Date());
+        newImportStock.setUpdatedDate(new Date());
 
         newImportStock = importStockRepository.save(newImportStock);
 
         List<DetailImportStocks> newDetailImportStocks = new ArrayList<>();
-        for (DetailImportRequest detailImport : importStock.getDetailImportStocks()){
+        for (DetailImportDTO detailImport : importStock.getDetailImportStocks()){
 
             Products product = productRepository.getReferenceById(detailImport.getProduct());
 
@@ -85,7 +93,7 @@ public class ImportStockService implements IImportStockService{
     }
 
     @Override
-    public ImportStocks updateImportStock(ImportStockRequest importStock) {
+    public ImportStocks updateImportStock(ImportStockDTO importStock) {
         return null;
     }
 

@@ -1,17 +1,17 @@
 package com.poly.ecommercestore.service.supplier;
 
 import com.poly.ecommercestore.entity.Suppliers;
-import com.poly.ecommercestore.request.system.SupplierRequest;
+import com.poly.ecommercestore.DTO.system.SupplierDTO;
 
 import java.util.List;
 
 public interface ISupplierService {
 
-    Suppliers addSupplier(SupplierRequest supplier);
+    Suppliers addSupplier(SupplierDTO supplier);
 
     List<Suppliers> getAllSupplier();
 
-    Suppliers updateSupplier(SupplierRequest supplier, int iDSupplier);
+    Suppliers updateSupplier(SupplierDTO supplier, int iDSupplier);
 
     Boolean deleteSupplier(int iDSupplier);
 }

@@ -2,6 +2,7 @@ package com.poly.ecommercestore.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "Categories")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Categories {
 
     @Id
@@ -24,20 +26,22 @@ public class Categories {
     @Column(name = "CategoryName")
     private String categoryName;
 
-    @JsonIgnoreProperties("category")
-    @Fetch(FetchMode.JOIN)
+    @Column(name = "Level")
+    private int level;
+
+    @Column(name = "Origin")
+    private int origin;
+
+    @JsonIgnore()
     @OneToMany(mappedBy = "category")
-    private List<DetailCategories> detailCategories;
+    private List<Products> products;
 
     public Categories() {
     }
 
-    public Categories(String categoryName) {
+    public Categories(String categoryName, int level, int origin) {
         this.categoryName = categoryName;
-    }
-
-    public Categories(String categoryName, List<DetailCategories> detailCategories) {
-        this.categoryName = categoryName;
-        this.detailCategories = detailCategories;
+        this.level = level;
+        this.origin = origin;
     }
 }

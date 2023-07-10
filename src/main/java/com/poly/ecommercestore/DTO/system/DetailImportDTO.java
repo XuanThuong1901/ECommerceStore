@@ -1,20 +1,20 @@
-package com.poly.ecommercestore.request.system;
+package com.poly.ecommercestore.DTO.system;
 
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-public class DetailImportRequest {
+public class DetailImportDTO {
     private int importStock;
     private int product;
     private int quantity;
     private BigDecimal price;
 
-    public DetailImportRequest() {
+    public DetailImportDTO() {
     }
 
-    public DetailImportRequest(int importStock, int iDProduct, int quantity, BigDecimal price) {
+    public DetailImportDTO(int importStock, int iDProduct, int quantity, BigDecimal price) {
         this.importStock = importStock;
         this.product = product;
         this.quantity = quantity;

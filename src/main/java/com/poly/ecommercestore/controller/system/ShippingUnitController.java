@@ -1,6 +1,6 @@
 package com.poly.ecommercestore.controller.system;
 
-import com.poly.ecommercestore.request.system.ShippingUnitRequest;
+import com.poly.ecommercestore.DTO.system.ShippingUnitDTO;
 import com.poly.ecommercestore.service.shared.ECommerceMessage;
 import com.poly.ecommercestore.service.shippingunit.ShippingUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class ShippingUnitController {
     }
 
     @PostMapping("/add")
-    private ResponseEntity<?> addShippingUnit(@RequestBody ShippingUnitRequest shippingUnit){
+    private ResponseEntity<?> addShippingUnit(@RequestBody ShippingUnitDTO shippingUnit){
         if(shippingUnit.getShippingUnitName() == null){
             return ResponseEntity.badRequest().body("Shipping unit not name");
         }
@@ -44,7 +44,7 @@ public class ShippingUnitController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<?> updateShippingUnit(@RequestBody ShippingUnitRequest shippingUnit, @PathVariable(value = "id") int id){
+    public ResponseEntity<?> updateShippingUnit(@RequestBody ShippingUnitDTO shippingUnit, @PathVariable(value = "id") int id){
 
         if(shippingUnit.getShippingUnitName() == null){
             return ResponseEntity.badRequest().body("Shipping unit not name");

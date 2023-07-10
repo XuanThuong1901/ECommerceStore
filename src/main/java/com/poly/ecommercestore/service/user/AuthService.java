@@ -2,7 +2,7 @@ package com.poly.ecommercestore.service.user;
 
 import com.poly.ecommercestore.entity.*;
 import com.poly.ecommercestore.repository.*;
-import com.poly.ecommercestore.request.client.UserRequest;
+import com.poly.ecommercestore.DTO.client.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class AuthService implements IAuthService{
     private static final int iDStatus = 1;
 
     @Override
-    public Accounts createUser(UserRequest user, String permission) {
+    public Accounts createUser(UserDTO user, String permission) {
         Accounts newAccount = new Accounts();
         Status status = statusRepository.getStatusById(iDStatus);
         Roles role = roleRepository.getRoleById(user.getRole());

@@ -13,6 +13,8 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "ShippingUnits")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class ShippingUnits {
 
     @Id
@@ -32,9 +34,6 @@ public class ShippingUnits {
     @Column(name = "Address", unique = true)
     private String address;
 
-    @Column(name = "ShippingCost")
-    private BigDecimal shippingCost;
-
     @JsonIgnore
     @OneToMany(mappedBy = "shippingUnit")
     private List<Orders> orders;
@@ -42,20 +41,18 @@ public class ShippingUnits {
     public ShippingUnits() {
     }
 
-    public ShippingUnits(String shippingUnitName, String email, String telephone, String address, BigDecimal shippingCost) {
+    public ShippingUnits(String shippingUnitName, String email, String telephone, String address) {
         this.shippingUnitName = shippingUnitName;
         this.email = email;
         this.telephone = telephone;
         this.address = address;
-        this.shippingCost = shippingCost;
     }
 
-    public ShippingUnits(String shippingUnitName, String email, String telephone, String address, BigDecimal shippingCost, List<Orders> orders) {
+    public ShippingUnits(String shippingUnitName, String email, String telephone, String address, List<Orders> orders) {
         this.shippingUnitName = shippingUnitName;
         this.email = email;
         this.telephone = telephone;
         this.address = address;
-        this.shippingCost = shippingCost;
         this.orders = orders;
     }
 }

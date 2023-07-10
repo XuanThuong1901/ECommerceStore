@@ -1,7 +1,7 @@
 package com.poly.ecommercestore.service.shippingunit;
 
 import com.poly.ecommercestore.entity.ShippingUnits;
-import com.poly.ecommercestore.request.system.ShippingUnitRequest;
+import com.poly.ecommercestore.DTO.system.ShippingUnitDTO;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ public interface IShippingUnitService {
 
     List<ShippingUnits> getAllShippingUnit();
 
-    ShippingUnits addShippingUnit(ShippingUnitRequest shippingUnit);
+    ShippingUnits addShippingUnit(ShippingUnitDTO shippingUnit);
 
-    Boolean updateShippingUnit(ShippingUnitRequest shippingUnit, int iDShippingUnit);
+    Boolean updateShippingUnit(ShippingUnitDTO shippingUnit, int iDShippingUnit);
 
     Boolean deleteShippingUnit(int iDShippingUnit);
 }
